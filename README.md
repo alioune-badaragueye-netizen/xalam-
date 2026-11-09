@@ -18,6 +18,7 @@ xalam/
 ├── js/data.js        → données : artistes, titres, genres, playlists par défaut
 ├── js/app.js         → toute la logique (navigation, affichage, lecteur audio)
 ├── audio/            → 6 extraits MP3 de démo (45 s, libres de droits)
+├── vercel.json       → en-têtes de sécurité (CSP, anti-iframe…) et cache des images/audio
 └── images/
     ├── logo.svg      → logo Xalam
     ├── artistes/     → 10 photos d'artistes (600 × 600 px)
