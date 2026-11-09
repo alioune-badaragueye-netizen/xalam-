@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xalam — La musique sénégalaise</title>
+  <meta name="description" content="Xalam : découvre la musique sénégalaise par genre, par région et par artiste.">
+  <link rel="icon" href="images/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- ===== Connexion / Inscription ===== -->
+  <section class="auth" id="auth" hidden>
+    <div class="auth-panel pattern">
+      <a href="#/connexion" class="logo"><img src="images/logo.svg" alt="" width="30" height="30"><span>xalam</span></a>
+      <div class="auth-bubbles" aria-hidden="true">
+        <span class="avatar has-photo" style="--size:150px;left:4%;top:12%;background-image:url('images/artistes/youssou.jpg')"></span>
+        <span class="avatar has-photo" style="--size:110px;left:38%;top:4%;background-image:url('images/artistes/baaba.jpg')"></span>
+        <span class="avatar has-photo" style="--size:170px;left:58%;top:22%;background-image:url('images/artistes/cheikhlo.jpg')"></span>
+        <span class="avatar has-photo" style="--size:120px;left:16%;top:52%;background-image:url('images/artistes/wally.jpg')"></span>
+        <span class="avatar has-photo" style="--size:90px;left:50%;top:62%;background-image:url('images/artistes/carlou.jpg')"></span>
+      </div>
+      <div class="auth-pitch">
+        <span class="label">★ Bienvenue sur Xalam</span>
+        <h1 id="auth-title">Ta musique,<br>ta teranga.</h1>
+        <p>Mbalax, rap galsen, afro-jazz, folk peul… Toute la musique du Sénégal au même endroit.</p>
+      </div>
+    </div>
+    <div class="auth-side">
+      <div class="auth-box">
+        <div class="auth-tabs">
+          <a href="#/connexion" data-auth-tab="connexion">Connexion</a>
+          <a href="#/inscription" data-auth-tab="inscription">Inscription</a>
+        </div>
+        <div id="auth-form"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="app">
+    <!-- ===== Barre latérale (desktop) ===== -->
+    <aside class="sidebar">
+      <a href="#/" class="logo" aria-label="Accueil Xalam">
+        <img src="images/logo.svg" alt="" width="30" height="30"><span>xalam</span>
+      </a>
+      <nav class="nav" aria-label="Navigation principale">
+        <a href="#/" data-nav="accueil"><i data-icon="home"></i>Accueil</a>
+        <a href="#/explorer" data-nav="explorer"><i data-icon="search"></i>Explorer</a>
+        <a href="#/bibliotheque" data-nav="bibliotheque"><i data-icon="lib"></i>Bibliothèque</a>
+        <a href="#/playlists" data-nav="playlists"><i data-icon="list"></i>Playlists</a>
+      </nav>
+      <div class="side-playlists">
+        <div class="side-head">
+          <span class="label">Mes playlists</span>
+          <button class="icon-btn small" data-action="new-playlist" aria-label="Nouvelle playlist"><i data-icon="plus"></i></button>
+        </div>
+        <ul id="side-playlists"></ul>
+      </div>
+      <div class="promo pattern">
+        <strong>Artiste ?</strong>
+        <p>Partage ta musique avec tout le Sénégal.</p>
+        <a href="#/explorer">Publier un titre →</a>
+      </div>
+    </aside>
+
+    <!-- ===== Contenu principal ===== -->
+    <main class="main" id="main">
+      <header class="topbar">
+        <a href="#/" class="logo logo-mobile" aria-label="Accueil Xalam">
+          <img src="images/logo.svg" alt="" width="26" height="26"><span>xalam</span>
+        </a>
+        <label class="searchbox">
+          <i data-icon="search"></i>
+          <input id="search" type="search" placeholder="Artistes, titres, genres…" autocomplete="off" aria-label="Rechercher">
+        </label>
+        <div class="topbar-right">
+          <a href="#/bibliotheque" class="icon-btn" aria-label="Titres aimés"><i data-icon="heart"></i></a>
+          <button class="user" id="user-btn" aria-label="Mon compte"><span class="avatar user-initial" id="user-avatar" style="--c1:#E07A5F;--c2:#C8553D"></span><span class="user-name" id="user-name">Invité</span><i data-icon="down"></i></button>
+        </div>
+      </header>
+      <div id="view" class="view"></div>
+    </main>
+  </div>
+
+  <!-- ===== Lecteur (barre desktop / mini-lecteur mobile) ===== -->
+  <footer class="player" id="player" aria-label="Lecteur audio">
+    <div class="player-track" data-action="open-full">
+      <span class="cover" id="p-cover"></span>
+      <div class="player-meta">
+        <strong id="p-title">Choisis un titre</strong>
+        <span id="p-artist" class="muted">Xalam</span>
+      </div>
+      <button class="icon-btn like-btn" id="p-like" aria-label="Aimer"><i data-icon="heart"></i></button>
+    </div>
+    <div class="player-center">
+      <div class="controls">
+        <button class="icon-btn" id="btn-shuffle" aria-label="Lecture aléatoire"><i data-icon="shuffle"></i></button>
+        <button class="icon-btn" id="btn-prev" aria-label="Précédent"><i data-icon="prev"></i></button>
+        <button class="play-btn" id="btn-play" aria-label="Lecture"><i data-icon="play"></i></button>
+        <button class="icon-btn" id="btn-next" aria-label="Suivant"><i data-icon="next"></i></button>
+        <button class="icon-btn" id="btn-repeat" aria-label="Répéter"><i data-icon="repeat"></i></button>
+      </div>
+      <div class="progress-row">
+        <span id="p-current" class="time">0:00</span>
+        <input type="range" id="p-seek" class="range" min="0" max="100" step="0.1" value="0" aria-label="Position">
+        <span id="p-duration" class="time">0:00</span>
+      </div>
+    </div>
+    <div class="player-right">
+      <button class="icon-btn" data-action="open-full" aria-label="File d'attente"><i data-icon="queue"></i></button>
+      <button class="icon-btn" id="btn-mute" aria-label="Couper le son"><i data-icon="vol"></i></button>
+      <input type="range" id="p-volume" class="range volume" min="0" max="1" step="0.01" value="0.8" aria-label="Volume">
+    </div>
+    <div class="mini-progress"><i id="p-mini"></i></div>
+  </footer>
+
+  <!-- ===== Barre d'onglets (mobile) ===== -->
+  <nav class="tabbar" aria-label="Navigation mobile">
+    <a href="#/" data-nav="accueil"><i data-icon="home"></i>Accueil</a>
+    <a href="#/explorer" data-nav="explorer"><i data-icon="search"></i>Explorer</a>
+    <a href="#/bibliotheque" data-nav="bibliotheque"><i data-icon="lib"></i>Biblio</a>
+    <a href="#/playlists" data-nav="playlists"><i data-icon="list"></i>Playlists</a>
+  </nav>
+
+  <!-- ===== Lecteur plein écran ===== -->
+  <section class="fullplayer pattern" id="fullplayer" aria-label="Lecteur plein écran" hidden>
+    <div class="fp-top">
+      <button class="icon-btn round" data-action="close-full" aria-label="Fermer"><i data-icon="down"></i></button>
+      <div class="fp-source"><span class="label">Lecture depuis</span><strong id="fp-source">Xalam</strong></div>
+      <a href="#/" class="logo fp-logo" data-action="close-full"><img src="images/logo.svg" alt="" width="26" height="26"><span>xalam</span></a>
+    </div>
+    <div class="fp-body">
+      <span class="cover fp-cover" id="fp-cover"></span>
+      <div class="fp-info">
+        <div class="fp-head">
+          <div>
+            <h2 id="fp-title" class="syne">—</h2>
+            <a id="fp-artist" class="fp-artist" href="#/">—</a>
+            <p id="fp-album" class="muted"></p>
+          </div>
+          <button class="icon-btn like-btn big" id="fp-like" aria-label="Aimer"><i data-icon="heart"></i></button>
+        </div>
+        <div class="fp-progress">
+          <input type="range" id="fp-seek" class="range" min="0" max="100" step="0.1" value="0" aria-label="Position">
+          <div class="fp-times"><span id="fp-current">0:00</span><span id="fp-duration">0:00</span></div>
+        </div>
+        <div class="controls fp-controls">
+          <button class="icon-btn" id="fp-shuffle" aria-label="Lecture aléatoire"><i data-icon="shuffle"></i></button>
+          <button class="icon-btn" id="fp-prev" aria-label="Précédent"><i data-icon="prev"></i></button>
+          <button class="play-btn big" id="fp-play" aria-label="Lecture"><i data-icon="play"></i></button>
+          <button class="icon-btn" id="fp-next" aria-label="Suivant"><i data-icon="next"></i></button>
+          <button class="icon-btn" id="fp-repeat" aria-label="Répéter"><i data-icon="repeat"></i></button>
+        </div>
+        <div class="fp-queue">
+          <div class="fp-queue-head"><span class="label">À suivre</span><span class="link-gold" id="fp-count"></span></div>
+          <div id="fp-queue"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Fenêtre : nouvelle playlist ===== -->
+  <div class="modal" id="modal" hidden>
+    <form class="modal-box" id="playlist-form">
+      <h3 class="syne">Nouvelle playlist</h3>
+      <label for="pl-name" class="muted">Nom de la playlist</label>
+      <input id="pl-name" type="text" maxlength="40" required placeholder="Ex. Route de Saly">
+      <label for="pl-desc" class="muted">Description (facultatif)</label>
+      <input id="pl-desc" type="text" maxlength="80" placeholder="Pour les trajets du week-end">
+      <div class="modal-actions">
+        <button type="button" class="btn ghost" data-action="close-modal">Annuler</button>
+        <button type="submit" class="btn">Créer</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- ===== Menu « ajouter à une playlist » ===== -->
+  <div class="menu" id="menu" hidden></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <audio id="audio" preload="metadata"></audio>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
